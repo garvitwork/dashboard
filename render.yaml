@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: explainable-ai-api
+    runtime: python3
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+    startCommand: python main.py
+    plan: free
+    healthCheckPath: /health
+    env:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: PYTHONPATH
+        value: .
+      - key: PORT
+        value: 8000
+    disk:
+      name: uploads
+      mountPath: /opt/render/project/src/temp_uploads
+      sizeGB: 1
